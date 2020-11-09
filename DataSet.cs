@@ -27,9 +27,20 @@ namespace Meuzz.Foundation
         {
             return new T1() { KeyColumns = source.KeyColumns, Columns = source.Columns.Where(x => cols.Contains(x)).ToArray(), Rows = source.Rows };
         }
+
         public static T1 CreateWithExcludingColumns<T1>(T1 source, C[] cols) where T1 : DataSet<C, T>, new()
         {
             return new T1() { KeyColumns = source.KeyColumns, Columns = source.Columns.Where(x => !cols.Contains(x)).ToArray(), Rows = source.Rows };
+        }
+
+        public static T1 CreateWithFilteringRows<T1>(T1 source, Func<T, bool> predicate) where T1 : DataSet<C, T>, new()
+        {
+            return new T1() { KeyColumns = source.KeyColumns, Columns = source.Columns, Rows = source.Rows.Where(x => predicate(x)).ToArray() };
+        }
+
+        public static T1 CreateWithExcludingRows<T1>(T1 source, Func<T, bool> predicate) where T1 : DataSet<C, T>, new()
+        {
+            return new T1() { KeyColumns = source.KeyColumns, Columns = source.Columns, Rows = source.Rows.Where(x => !predicate(x)).ToArray() };
         }
 
         /// <summary>
