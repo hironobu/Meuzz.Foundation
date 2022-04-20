@@ -6,7 +6,7 @@ namespace Meuzz.Foundation
 {
     public class DataSet<C, T>
     {
-        public DataSet()
+        public DataSet() : this(new C[] { }, new C[] { }, new T[] { })
         {
         }
 
@@ -54,11 +54,11 @@ namespace Meuzz.Foundation
 
             if (dataSets.Any())
             {
-                cols = dataSets.FirstOrDefault()?.Columns;
+                cols = dataSets.FirstOrDefault()?.Columns ?? cols;
                 rows = Arrays.Concat<T>(dataSets.Select((x) => x.Rows).ToArray());
             }
 
-            return new T1() { KeyColumns = dataSets.FirstOrDefault()?.KeyColumns, Columns = cols, Rows = rows };
+            return new T1() { KeyColumns = dataSets.FirstOrDefault()?.KeyColumns ?? new C[] { }, Columns = cols, Rows = rows };
         }
 
     }
@@ -77,11 +77,11 @@ namespace Meuzz.Foundation
 
             if (dataSets.Any())
             {
-                cols = dataSets.FirstOrDefault()?.Columns;
+                cols = dataSets.FirstOrDefault()?.Columns ?? cols;
                 rows = Arrays.Concat<T>(dataSets.Select((x) => x.Rows).ToArray());
             }
 
-            return new T2() { KeyColumns = dataSets.FirstOrDefault()?.KeyColumns, Columns = cols, Rows = rows };
+            return new T2() { KeyColumns = dataSets.FirstOrDefault()?.KeyColumns ?? new C[] { }, Columns = cols, Rows = rows };
         }
     }
 }

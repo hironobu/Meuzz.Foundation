@@ -8,8 +8,6 @@ namespace Meuzz.Foundation
     {
         public static string ToSnake(string s, bool toupper = false)
         {
-            if (s == null) throw new ArgumentNullException("s");
-
             var ret = new StringBuilder();
             for (int i = 0; i < s.Length; i++)
             {
@@ -26,8 +24,6 @@ namespace Meuzz.Foundation
 
         public static string ToCamel(string s, bool upperCamel = false)
         {
-            if (s == null) throw new ArgumentNullException("s");
-
             var ss = s.ToLower().Split('_');
             if (ss.Length == 1)
             {
@@ -40,8 +36,6 @@ namespace Meuzz.Foundation
 
         public static string Capitalize(string s)
         {
-            if (s == null) throw new ArgumentNullException("s");
-
             if (s.Length == 0) { return ""; }
             return Char.ToUpper(s[0]) + s.Substring(1);
         }

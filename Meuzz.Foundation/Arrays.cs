@@ -15,7 +15,7 @@ namespace Meuzz.Foundation
             if (arr1.Length != arr2.Length)
                 return false;
 
-            return arr1.Zip(arr2, (a, b) => a.Equals(b)).All(x => x);
+            return arr1.Zip(arr2, (a, b) => a?.Equals(b) == true).All(x => x);
         }
 
         public static T[] Concat<T>(params T[][] arrs)

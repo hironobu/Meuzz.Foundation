@@ -37,8 +37,8 @@ namespace Meuzz.Foundation.Tests
             Assert.Equal("", StringUtils.ToCamel(""));
             Assert.Equal("", StringUtils.ToCamel("", true));
 
-            var ex = Assert.Throws<ArgumentNullException>(() => StringUtils.ToCamel(null));
-            Assert.Contains("Parameter 's'", ex.Message);
+            //var ex = Assert.Throws<ArgumentNullException>(() => StringUtils.ToCamel(null));
+            //Assert.Contains("Parameter 's'", ex.Message);
         }
 
         [Fact]
@@ -55,8 +55,8 @@ namespace Meuzz.Foundation.Tests
             Assert.Equal("", StringUtils.ToSnake(""));
             Assert.Equal("", StringUtils.ToSnake("", true));
 
-            var ex = Assert.Throws<ArgumentNullException>(() => StringUtils.ToSnake(null));
-            Assert.Contains("Parameter 's'", ex.Message);
+            //var ex = Assert.Throws<ArgumentNullException>(() => StringUtils.ToSnake(null));
+            //Assert.Contains("Parameter 's'", ex.Message);
         }
     }
 }
