@@ -1,12 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 
 namespace Meuzz.Foundation
 {
-    public class StringUtils
+    public static class StringUtilsExtensions
     {
-        public static string ToSnake(string s, bool toupper = false)
+        public static string ToSnake(this string s, bool toupper = false)
         {
             var ret = new StringBuilder();
             for (int i = 0; i < s.Length; i++)
@@ -17,12 +16,12 @@ namespace Meuzz.Foundation
                     ret.Append('_');
                 }
 
-                ret.Append(toupper ? Char.ToUpper(c) : Char.ToLower(c));
+                ret.Append(toupper ? char.ToUpper(c) : char.ToLower(c));
             }
             return ret.ToString();
         }
 
-        public static string ToCamel(string s, bool upperCamel = false)
+        public static string ToCamel(this string s, bool upperCamel = false)
         {
             var ss = s.ToLower().Split('_');
             if (ss.Length == 1)
@@ -30,14 +29,14 @@ namespace Meuzz.Foundation
                 return !upperCamel ? s : Capitalize(s);
             }
             return upperCamel
-                ? string.Join("", ss.Select(x => Capitalize(x)))
-                : string.Join("", ss.Select((x, i) => i == 0 && !upperCamel ? x.ToLower() : Capitalize(x)));
+                ? string.Join(string.Empty, ss.Select(x => Capitalize(x)))
+                : string.Join(string.Empty, ss.Select((x, i) => i == 0 && !upperCamel ? x.ToLower() : Capitalize(x)));
         }
 
-        public static string Capitalize(string s)
+        public static string Capitalize(this string s)
         {
-            if (s.Length == 0) { return ""; }
-            return Char.ToUpper(s[0]) + s.Substring(1);
+            if (s.Length == 0) { return string.Empty; }
+            return char.ToUpper(s[0]) + s.Substring(1);
         }
     }
 }
