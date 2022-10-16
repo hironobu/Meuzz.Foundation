@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Meuzz.Foundation
 {
@@ -41,6 +43,29 @@ namespace Meuzz.Foundation
 
             return resultMatrix;
         }
+    }
 
+    public static class IEnumerableExtensions
+    {
+        public static IEnumerable<object?> EnumerableUncast<T>(this IEnumerable<T> args, Type t)
+        {
+            // TODO: array or list以外は避けるように(ex. IDictionary<>)
+            var t1 = t.IsGenericType && t.GetGenericArguments().Length == 1 ? t.GetGenericArguments()[0] : t;
+
+            switch (t1)
+            {
+                case Type inttype when inttype == typeof(int):
+                    return args.Select(x => (object)Convert.ToInt32(x));
+
+                case Type longtype when longtype == typeof(long):
+                    return args.Select(x => (object)Convert.ToInt64(x));
+
+                default:
+                    var conv = _methodInfoCast.MakeGenericMethod(t1);
+                    return (IEnumerable<object?>)conv.Invoke(null, new[] { args })!;
+            }
+        }
+
+        private static MethodInfo _methodInfoCast = typeof(Enumerable).GetMethod("Cast") ?? throw new NotImplementedException();
     }
 }
