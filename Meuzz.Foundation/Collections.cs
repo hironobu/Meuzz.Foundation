@@ -68,4 +68,25 @@ namespace Meuzz.Foundation
 
         private static MethodInfo _methodInfoCast = typeof(Enumerable).GetMethod("Cast") ?? throw new NotImplementedException();
     }
+
+    public static class IDictionaryExtensions
+    {
+        public static TValue GetValueOrNew<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key)
+            where TKey : notnull
+            where TValue : new()
+        {
+            return GetValueOrFunc(self, key, () => new TValue());
+        }
+
+        public static TValue GetValueOrFunc<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key, Func<TValue> newFunc)
+            where TKey : notnull
+        {
+            if (!self.TryGetValue(key, out TValue value))
+            {
+                value = newFunc();
+                self.Add(key, value);
+            }
+            return value;
+        }
+    }
 }
