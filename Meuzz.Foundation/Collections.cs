@@ -45,6 +45,25 @@ namespace Meuzz.Foundation
         }
     }
 
+    public static class CastExtensions
+    {
+        public static object? Uncast(this object? x, Type t1)
+        {
+            switch (t1)
+            {
+                case Type inttype when inttype == typeof(int):
+                    return Convert.ToInt32(x);
+
+                case Type longtype when longtype == typeof(long):
+                    return Convert.ToInt64(x);
+
+                default:
+                    return Convert.ChangeType(x, t1);
+            }
+        }
+    }
+
+
     public static class IEnumerableExtensions
     {
         public static IEnumerable<object?> EnumerableUncast<T>(this IEnumerable<T> args, Type t)
