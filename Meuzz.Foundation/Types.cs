@@ -31,7 +31,7 @@ namespace Meuzz.Foundation
             var t = source.GetType();
             if (!t.IsTuple())
             {
-                return source;
+                throw new ArgumentException("argument should be tuple", "source");
             }
 
             var fields = t.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
