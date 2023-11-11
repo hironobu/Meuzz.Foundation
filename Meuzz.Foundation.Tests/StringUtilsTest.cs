@@ -9,33 +9,33 @@ namespace Meuzz.Foundation.Tests
         [Fact]
         public void TestSnake2Camel()
         {
-            Assert.Equal("fooBar", StringUtils.ToCamel("foo_bar"));
-            Assert.Equal("FooBar", StringUtils.ToCamel("foo_bar", true));
-            Assert.Equal("fooBar", StringUtils.ToCamel("FOO_BAR"));
-            Assert.Equal("FooBar", StringUtils.ToCamel("FOO_BAR", true));
+            Assert.Equal("fooBar", "foo_bar".ToCamel());
+            Assert.Equal("FooBar", "foo_bar".ToCamel(true));
+            Assert.Equal("fooBar", "FOO_BAR".ToCamel());
+            Assert.Equal("FooBar", "FOO_BAR".ToCamel(true));
 
-            Assert.Equal("aFoo", StringUtils.ToCamel("a_foo"));
-            Assert.Equal("AFoo", StringUtils.ToCamel("a_foo", true));
+            Assert.Equal("aFoo", "a_foo".ToCamel());
+            Assert.Equal("AFoo", "a_foo".ToCamel(true));
 
-            Assert.Equal("aBC", StringUtils.ToCamel("a_b_c"));
-            Assert.Equal("ABC", StringUtils.ToCamel("a_b_c", true));
+            Assert.Equal("aBC", "a_b_c".ToCamel());
+            Assert.Equal("ABC", "a_b_c".ToCamel(true));
 
             // without "_"
-            Assert.Equal("abc", StringUtils.ToCamel("abc"));
-            Assert.Equal("Abc", StringUtils.ToCamel("abc", true));
-            Assert.Equal("fooBar", StringUtils.ToCamel("fooBar"));
-            Assert.Equal("FooBar", StringUtils.ToCamel("fooBar", true));
+            Assert.Equal("abc", "abc".ToCamel());
+            Assert.Equal("Abc", "abc".ToCamel(true));
+            Assert.Equal("fooBar", "fooBar".ToCamel());
+            Assert.Equal("FooBar", "fooBar".ToCamel(true));
 
-            Assert.Equal("fooBar", StringUtils.ToCamel("foo__bar"));
-            Assert.Equal("FooBar", StringUtils.ToCamel("foo__bar", true));
-            Assert.Equal("fooBar", StringUtils.ToCamel("FOO__BAR"));
-            Assert.Equal("FooBar", StringUtils.ToCamel("FOO__BAR", true));
+            Assert.Equal("fooBar", "foo__bar".ToCamel());
+            Assert.Equal("FooBar", "foo__bar".ToCamel(true));
+            Assert.Equal("fooBar", "FOO__BAR".ToCamel());
+            Assert.Equal("FooBar", "FOO__BAR".ToCamel(true));
 
-            Assert.Equal("aaBbCc", StringUtils.ToCamel("aa___bb__cc"));
-            Assert.Equal("AaBbCc", StringUtils.ToCamel("aa___bb__cc", true));
+            Assert.Equal("aaBbCc", "aa___bb__cc".ToCamel());
+            Assert.Equal("AaBbCc", "aa___bb__cc".ToCamel(true));
 
-            Assert.Equal("", StringUtils.ToCamel(""));
-            Assert.Equal("", StringUtils.ToCamel("", true));
+            Assert.Equal("", "".ToCamel());
+            Assert.Equal("", "".ToCamel(true));
 
             //var ex = Assert.Throws<ArgumentNullException>(() => StringUtils.ToCamel(null));
             //Assert.Contains("Parameter 's'", ex.Message);
@@ -44,16 +44,16 @@ namespace Meuzz.Foundation.Tests
         [Fact]
         public void TestCamel2Snake()
         {
-            Assert.Equal("foo_bar", StringUtils.ToSnake("fooBar"));
-            Assert.Equal("foo_bar", StringUtils.ToSnake("FooBar"));
-            Assert.Equal("FOO_BAR", StringUtils.ToSnake("fooBar", true));
-            Assert.Equal("FOO_BAR", StringUtils.ToSnake("FooBar", true));
+            Assert.Equal("foo_bar", "fooBar".ToSnake());
+            Assert.Equal("foo_bar", "FooBar".ToSnake());
+            Assert.Equal("FOO_BAR", "fooBar".ToSnake(true));
+            Assert.Equal("FOO_BAR", "FooBar".ToSnake(true));
 
-            Assert.Equal("a_b_c", StringUtils.ToSnake("ABC"));
-            Assert.Equal("A_B_C", StringUtils.ToSnake("ABC", true));
+            Assert.Equal("a_b_c", "ABC".ToSnake());
+            Assert.Equal("A_B_C", "ABC".ToSnake(true));
 
-            Assert.Equal("", StringUtils.ToSnake(""));
-            Assert.Equal("", StringUtils.ToSnake("", true));
+            Assert.Equal("", "".ToSnake());
+            Assert.Equal("", "".ToSnake(true));
 
             //var ex = Assert.Throws<ArgumentNullException>(() => StringUtils.ToSnake(null));
             //Assert.Contains("Parameter 's'", ex.Message);
